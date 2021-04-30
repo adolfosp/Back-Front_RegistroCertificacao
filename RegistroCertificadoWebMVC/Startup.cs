@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RegistroCertificadoWebMVC.Data;
+using RegistroCertificadoWebMVC.Services;
 
 namespace RegistroCertificadoWebMVC
 {
@@ -29,6 +30,9 @@ namespace RegistroCertificadoWebMVC
 
             services.AddDbContext<RegistroCertificadoWebMVCContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("RegistroCertificadoWebMVCContext")));
+
+            services.AddScoped<InstituicaoService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

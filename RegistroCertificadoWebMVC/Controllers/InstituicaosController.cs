@@ -7,22 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RegistroCertificadoWebMVC.Data;
 using RegistroCertificadoWebMVC.Models;
+using RegistroCertificadoWebMVC.Services;
 
 namespace RegistroCertificadoWebMVC.Controllers
 {
     public class InstituicaosController : Controller
     {
         private readonly RegistroCertificadoWebMVCContext _context;
+        private readonly InstituicaoService _instituicaoService;
 
-        public InstituicaosController(RegistroCertificadoWebMVCContext context)
+        public InstituicaosController(RegistroCertificadoWebMVCContext context, InstituicaoService instituicaoService)
         {
             _context = context;
+            _instituicaoService = instituicaoService;
         }
 
         // GET: Instituicaos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Instituicao.ToListAsync());
+            return View(await _instituicaoService.FindAllAsync());
         }
 
         // GET: Instituicaos/Details/5
