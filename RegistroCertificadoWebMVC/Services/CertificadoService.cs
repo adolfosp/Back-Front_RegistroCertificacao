@@ -36,5 +36,32 @@ namespace RegistroCertificadoWebMVC.Services
                 .Include(x => x.Instituicao).ToListAsync();
 
         }
+        public async Task<Certificado> FindByIdAsync(int id)
+        {
+            return await _context.Certificado.Include(obj => obj.Instituicao).FirstOrDefaultAsync(obj => obj.Id == id);
+            //eager loading - carregar um objeto dentro de outro objeto
+        }
+
+        public async Task UpdateAsync(Certificado certificado)
+        {
+            //bool hasAny = await _context.Certificado.AnyAsync(x => x.Id == certificado.Id);
+            //if (!hasAny)
+            //{
+            //    throw new ApplicationException("Não foi possível encontrar o certificado");
+            //}
+
+            try
+            {
+                _context.Update(certificado);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (ApplicationException ex)
+            {
+                throw new ApplicationException("Não foi possível atualizar o registro: " + ex.Message);
+            }
+
+        }
+
     }
 }

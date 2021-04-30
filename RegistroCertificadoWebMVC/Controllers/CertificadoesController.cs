@@ -16,12 +16,13 @@ namespace RegistroCertificadoWebMVC.Controllers
     {
         private readonly InstituicaoService _instituicaoService;
         private readonly CertificadoService _certificadoService;
+        private readonly AreaCertificadoService _areaCertificadoService;
 
-
-        public CertificadoesController( InstituicaoService instituicaoService, CertificadoService certificadoService)
+        public CertificadoesController( InstituicaoService instituicaoService, CertificadoService certificadoService,AreaCertificadoService areaCertificadoService)
         {
             _instituicaoService = instituicaoService;
             _certificadoService = certificadoService;
+            _areaCertificadoService = areaCertificadoService;
         }
 
         // GET: Certificadoes
@@ -35,7 +36,7 @@ namespace RegistroCertificadoWebMVC.Controllers
        
         public async Task<IActionResult> Create()
         {
-            var listEnum = Enum.GetNames(typeof(AreaCertificado));
+            var listEnum = _areaCertificadoService.RetornarEnum();
             var instituicaos = await _instituicaoService.FindAllAsync();
             var viewModel = new CertificadoFormViewModel { Instituicaos = instituicaos, AreaCertificados =  listEnum};
             return View(viewModel);
@@ -55,6 +56,58 @@ namespace RegistroCertificadoWebMVC.Controllers
             await _certificadoService.InsertAsync(certificado);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            //if (id == null)
+            //{
+            //    return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            //}
 
+            var obj = await _certificadoService.FindByIdAsync(id.Value);
+
+            //if (obj == null)
+            //{
+            //    return RedirectToAction(nameof(Error), new { message = "Id not Found" });
+            //}
+            List<Instituicao> instituicaos = await _instituicaoService.FindAllAsync();
+            var listEnum = _areaCertificadoService.RetornarEnum();
+
+            CertificadoFormViewModel viewModel = new CertificadoFormViewModel { Certificado = obj, Instituicaos = instituicaos, AreaCertificados = listEnum};
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Certificado certificado)
+
+        {
+            Console.WriteLine(certificado);
+            Console.WriteLine(id);
+            //if (!ModelState.IsValid)
+            //{
+            //    var departments = await _departmentService.FindAllAsync();
+            //    var viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
+            //    return View(viewModel);
+            //}
+
+            //if (id != obj.Id)
+            //{
+            //    return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            //}
+            try
+            {
+                await _certificadoService.UpdateAsync(certificado);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                //return RedirectToAction(nameof(Error), new { message = e.Message });
+                throw new Exception("Não foi possível atualizar o registro: " + e.Message);
+
+            }
+            
+
+
+        }
     }
 }
