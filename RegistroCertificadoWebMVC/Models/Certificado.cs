@@ -13,14 +13,15 @@ namespace RegistroCertificadoWebMVC.Models
         public string Descricao { get; set; }
         public int HorasConclusao { get; set; }
         public Instituicao Instituicao { get; set; }
+        public int InstituicaoId { get; set; }
         public AreaCertificado AreaCertificado { get; set; }
-
+       
         public Certificado()
         {
 
         }
 
-        public Certificado(int id, string descricao, int horasConclusao, Instituicao instituicao,AreaCertificado areaCertificado)
+        public Certificado(int id, string descricao, int horasConclusao, Instituicao instituicao, AreaCertificado areaCertificado)
         {
             Id = id;
             Descricao = descricao;

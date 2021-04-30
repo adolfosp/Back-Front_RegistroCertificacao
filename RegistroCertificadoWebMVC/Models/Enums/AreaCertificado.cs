@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace RegistroCertificadoWebMVC.Models.Enums
 {
-    public enum AreaCertificado : int
+    public enum AreaCertificado: int
     {
-        BackEnd = 0,
-        FrontEnd = 1
+        BackEnd,
+        FrontEnd
     }
+
 }

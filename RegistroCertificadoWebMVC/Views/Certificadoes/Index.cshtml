@@ -18,6 +18,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.HorasConclusao)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AreaCertificado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instituicao)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -30,6 +36,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.HorasConclusao)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreaCertificado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instituicao.Nome)
+            </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

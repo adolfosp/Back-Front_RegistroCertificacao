@@ -32,6 +32,7 @@ namespace RegistroCertificadoWebMVC
                     options.UseSqlServer(Configuration.GetConnectionString("RegistroCertificadoWebMVCContext")));
 
             services.AddScoped<InstituicaoService>();
+            services.AddScoped<CertificadoService>();
 
         }
 
