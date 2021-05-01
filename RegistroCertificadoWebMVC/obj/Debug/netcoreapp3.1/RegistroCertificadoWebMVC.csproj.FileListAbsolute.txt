@@ -120,7 +120,6 @@ C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\bin\
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\RegistroCertificadoWebMVC.csprojAssemblyReference.cache
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\RegistroCertificadoWebMVC.AssemblyInfoInputs.cache
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\RegistroCertificadoWebMVC.AssemblyInfo.cs
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\RegistroCertificadoWebMVC.csproj.CoreCompileInputs.cache
@@ -157,3 +156,4 @@ C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\Razor\Views\Certificadoes\Details.cshtml.g.cs
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\Razor\Views\Certificadoes\Edit.cshtml.g.cs
 C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\Razor\Views\Certificadoes\Index.cshtml.g.cs
+C:\Users\Adolfo\source\repos\RegistroCertificacao\RegistroCertificadoWebMVC\obj\Debug\netcoreapp3.1\RegistroCertificadoWebMVC.csprojAssemblyReference.cache

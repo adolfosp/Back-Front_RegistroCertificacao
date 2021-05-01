@@ -105,9 +105,39 @@ namespace RegistroCertificadoWebMVC.Controllers
                 throw new Exception("Não foi possível atualizar o registro: " + e.Message);
 
             }
-            
+
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+          
+
+            Certificado certificado = await _certificadoService.FindByIdAsync(id.Value);
+           
+            return View(certificado);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _certificadoService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Não foi possível remover o registro: " + e.Message);
+            }
+
+        }
 
 
+        public async Task<IActionResult> Details(int id)
+        {
+           var detalheCertificadoRetornado = await _certificadoService.FindByIdAsync(id);
+           return View(detalheCertificadoRetornado);
         }
     }
 }

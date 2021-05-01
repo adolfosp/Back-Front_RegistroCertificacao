@@ -44,11 +44,7 @@ namespace RegistroCertificadoWebMVC.Services
 
         public async Task UpdateAsync(Certificado certificado)
         {
-            //bool hasAny = await _context.Certificado.AnyAsync(x => x.Id == certificado.Id);
-            //if (!hasAny)
-            //{
-            //    throw new ApplicationException("Não foi possível encontrar o certificado");
-            //}
+            
 
             try
             {
@@ -62,6 +58,24 @@ namespace RegistroCertificadoWebMVC.Services
             }
 
         }
+        public async Task RemoveAsync(int id)
+        {
 
+            try
+            {
+                Certificado certificado = await _context.Certificado.FindAsync(id);
+
+                _context.Certificado.Remove(certificado);
+                await _context.SaveChangesAsync();
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+        }
+
+
+       
     }
 }
