@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RegistroCertificadoWebMVC.Models;
+using RegistroCertificadoWebMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

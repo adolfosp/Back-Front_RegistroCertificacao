@@ -12,12 +12,15 @@ namespace RegistroCertificadoWebMVC.Models
 
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "{0} Campo requerido")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
+        [Required(ErrorMessage = "{0} Campo requerido")]
         [Display(Name = "Horas de Curso")]
         public int HorasConclusao { get; set; }
 
+        [Required(ErrorMessage = "{0} Campo requerido")]
         [Display(Name = "Nome da Instituição")]
         public Instituicao Instituicao { get; set; }
 

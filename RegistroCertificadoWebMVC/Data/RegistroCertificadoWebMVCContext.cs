@@ -17,5 +17,9 @@ namespace RegistroCertificadoWebMVC.Data
         public DbSet<Instituicao> Instituicao { get; set; }
 
         public DbSet<RegistroCertificadoWebMVC.Models.Certificado> Certificado { get; set; }
+
+        public DbSet<RegistroCertificadoWebMVC.Models.Usuario> Usuario { get; set; }
+
+
     }
 }

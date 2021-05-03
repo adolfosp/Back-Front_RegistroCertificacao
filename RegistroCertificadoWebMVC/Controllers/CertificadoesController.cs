@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using RegistroCertificadoWebMVC.Data;
 using RegistroCertificadoWebMVC.Models;
 using RegistroCertificadoWebMVC.Models.Enums;
+using RegistroCertificadoWebMVC.Models;
 using RegistroCertificadoWebMVC.Services;
 
 namespace RegistroCertificadoWebMVC.Controllers
@@ -47,12 +49,14 @@ namespace RegistroCertificadoWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Certificado certificado)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var departments = await _departmentService.FindAllAsync();
-            //    var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
-            //    return View(viewModel);
-            //}
+            if (!ModelState.IsValid)
+            {
+                //ModelState.IsValid indica se foi possível vincular os valores recebidos da solicitação ao modelo corretamente e se alguma regra de validação explicitamente especificada foi quebrada durante o processo de vinculação do modelo.
+                var instituicaos = await _instituicaoService.FindAllAsync();
+                var viewModel = new CertificadoFormViewModel { Certificado = certificado, Instituicaos = instituicaos };
+                //retorno os valores que estavam nos campos
+                return View(viewModel);
+            }
             await _certificadoService.InsertAsync(certificado);
             return RedirectToAction(nameof(Index));
         }
@@ -81,19 +85,19 @@ namespace RegistroCertificadoWebMVC.Controllers
         public async Task<IActionResult> Edit(int id, Certificado certificado)
 
         {
-            Console.WriteLine(certificado);
-            Console.WriteLine(id);
-            //if (!ModelState.IsValid)
-            //{
-            //    var departments = await _departmentService.FindAllAsync();
-            //    var viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
-            //    return View(viewModel);
-            //}
+           
+            if (!ModelState.IsValid)
+            {
+                var instituicaos = await _instituicaoService.FindAllAsync();
+                var viewModel = new CertificadoFormViewModel { Certificado = certificado, Instituicaos = instituicaos };
+                return View(viewModel);
+            }
 
-            //if (id != obj.Id)
-            //{
-            //    return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
-            //}
+            if (id != certificado.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
+            }
+
             try
             {
                 await _certificadoService.UpdateAsync(certificado);
@@ -101,8 +105,7 @@ namespace RegistroCertificadoWebMVC.Controllers
             }
             catch (ApplicationException e)
             {
-                //return RedirectToAction(nameof(Error), new { message = e.Message });
-                throw new Exception("Não foi possível atualizar o registro: " + e.Message);
+                return RedirectToAction(nameof(Error), new { message = e.Message });
 
             }
 
@@ -138,6 +141,16 @@ namespace RegistroCertificadoWebMVC.Controllers
         {
            var detalheCertificadoRetornado = await _certificadoService.FindByIdAsync(id);
            return View(detalheCertificadoRetornado);
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

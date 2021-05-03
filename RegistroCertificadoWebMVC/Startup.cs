@@ -34,6 +34,8 @@ namespace RegistroCertificadoWebMVC
             services.AddScoped<InstituicaoService>();
             services.AddScoped<CertificadoService>();
             services.AddScoped<AreaCertificadoService>();
+            services.AddScoped<UsuarioService>();
+
 
 
         }
