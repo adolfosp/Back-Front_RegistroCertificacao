@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\UsuariosController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Services\CertificadoService.cs~RF2889ceb0.TMP" />
   </ItemGroup>
 

@@ -7,22 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RegistroCertificadoWebMVC.Data;
 using RegistroCertificadoWebMVC.Models;
+using RegistroCertificadoWebMVC.Services;
 
 namespace RegistroCertificadoWebMVC.Controllers
 {
     public class UsuariosController : Controller
     {
         private readonly RegistroCertificadoWebMVCContext _context;
+        private readonly UsuarioService _usuarioService;
+        private readonly PerfilUsuarioService _perfilUsuarioService;
 
-        public UsuariosController(RegistroCertificadoWebMVCContext context)
+        public UsuariosController(RegistroCertificadoWebMVCContext context, UsuarioService usuarioService, PerfilUsuarioService perfilUsuarioService)
         {
             _context = context;
+            _usuarioService = usuarioService;
+            _perfilUsuarioService = perfilUsuarioService;
         }
 
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            return View(await _usuarioService.FindAllAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -46,7 +51,9 @@ namespace RegistroCertificadoWebMVC.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            return View();
+            String[] listaEnumPerfilUsuario = _perfilUsuarioService.RetornarEnum();
+            CertificadoFormViewModel listaDeObjetos = new CertificadoFormViewModel { PerfilUsuarios = listaEnumPerfilUsuario };
+            return View(listaDeObjetos);
         }
 
         // POST: Usuarios/Create
@@ -54,15 +61,32 @@ namespace RegistroCertificadoWebMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Senha,Login,Perfil,Ativo,Email")] Usuario usuario)
+        public async Task<IActionResult> Create(Usuario usuario)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                String[] listaEnumPerfilUsuario = _perfilUsuarioService.RetornarEnum();
+
+                var viewModel = new CertificadoFormViewModel
+                {
+                    Usuario = usuario,
+                    PerfilUsuarios = listaEnumPerfilUsuario
+                };
+                return View(viewModel);
             }
-            return View(usuario);
+
+            await _usuarioService.CreateUser(usuario);
+
+            return RedirectToAction(nameof(Index));
+
+
+
+
+
+
+
+
+
         }
 
         // GET: Usuarios/Edit/5

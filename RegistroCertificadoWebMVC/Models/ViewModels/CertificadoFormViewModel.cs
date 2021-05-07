@@ -12,6 +12,8 @@ namespace RegistroCertificadoWebMVC.Models
         public Certificado Certificado { get; set; }
         public ICollection<Instituicao> Instituicaos { get; set; }
 
+        public Usuario Usuario { get; set; }
         public String[] AreaCertificados { get; set; }
+        public String[] PerfilUsuarios { get; set; }
     }
 }
